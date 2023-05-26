@@ -1,0 +1,262 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Poppins", serif;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* header */
+.header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 16px 0px;
+  color: #2c2c2c;
+}
+
+/* Main */
+
+.main {
+  margin-top: 2rem;
+  padding: 0px 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.main_item-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.main_item-container h3 {
+  font-weight: 400;
+}
+
+.main_item-container p {
+  font-size: 1.3rem;
+}
+
+.h3-icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.h3-icon.entrada i {
+  color: green;
+  font-size: 1.2rem;
+}
+
+.h3-icon.saida i {
+  color: red;
+  font-size: 1.2rem;
+}
+
+/* Inputs */
+.inputs_container {
+  padding: 20px;
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  gap: 20px;
+}
+
+.inputs_container a {
+  text-decoration: none;
+  color: #fff;
+  background-color: #2c2c2c;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+#select {
+  padding: 8px;
+  border-radius: 8px;
+  color: #000;
+  background-color: #ffff;
+  cursor: pointer;
+}
+
+#entrada-btn {
+  background-color: #0f34af;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  transition: 0.3s ease;
+}
+
+#entrada-btn:hover {
+  background-color: #071d64;
+}
+
+/* Transações */
+
+.transacoes_container {
+  padding: 20px;
+}
+
+.transacoes_container li {
+  list-style: none;
+}
+
+.transacoes_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e2e2e2;
+  padding-bottom: 32px;
+  margin-top: 32px;
+}
+.valor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.valor i {
+  font-size: 1.5rem;
+  padding: 6px;
+  background-color: transparent !important;
+  color: #000 !important;
+  cursor: pointer;
+}
+.entrada_icon {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.entrada_icon i {
+  font-size: 1.5rem;
+  background-color: #e2e2e2;
+  color: #000;
+  padding: 16px;
+  border-radius: 50%;
+}
+
+.entrada_info span {
+  color: #666666;
+}
+
+.transacoes_item.transacao-entrada i {
+  background-color: #00ff80;
+  color: #004e27;
+}
+
+/* Responsivo  */
+
+@media (max-width: 700px) {
+  .main {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* MODAL */
+@keyframes modal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -60px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.mostrar .modal_content {
+  animation: modal 0.3s;
+}
+.modal_container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_container.mostrar {
+  display: flex;
+}
+
+.modal_content {
+  background-color: #fff;
+  max-width: 60%;
+  min-width: 250px;
+  padding: 30px;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input {
+  font-size: 1rem;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.fechar {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background-color: #fff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.form_btn {
+  border: none;
+  padding: 14px 16px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.form_btn.entrada {
+  background-color: #0faf5f;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  transition: 0.3s ease;
+}
+
+.form_btn.entrada:hover {
+  background-color: #06723c;
+}
+
+.form_btn.saida {
+  background-color: #d4210a;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.form_btn.saida:hover {
+  background-color: #b11b07;
+}

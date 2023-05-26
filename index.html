@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+
+  <!-- REMIX ICON -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header">
+    <h2>ECONOMIZZE <i class="ri-swap-line"></i></h2>
+  </header>
+  <main class="main">
+    <div class="main_item-container">
+      <h3 class="h3-icon entrada">Entradas R$ <i class="ri-arrow-up-line"></i></h3>
+      <p> 0.00</p>
+    </div>
+    <div class=" main_item-container">
+      <h3 class="h3-icon saida">Saidas R$ <i class="ri-arrow-down-line"></i></h3>
+      <p> 0.00</p>
+    </div>
+    <div class=" main_item-container">
+      <h3>Total R$ </h3>
+      <p> 0.00</p>
+    </div>
+  </main>
+  <section class="inputs_container">
+    <a href="#" id="entrada-btn">Registrar transação</a>
+  </section>
+
+  <section class="transacoes_container">
+    <ul id="transacoes_ul">
+      <!--  <li>
+        <div class="transacoes_item transacao-entrada">
+          <div class="entrada_icon">
+            <i class="ri-arrow-up-line"></i>
+            <div class="entrada_info">
+              <h4>Salário</h4>
+              <span>07:00</span>
+            </div>
+          </div>
+          <div class="valor">
+            <h3>R$ 1200</h3>
+            <div>
+              <i class="ri-delete-bin-line"></i>
+            </div>
+          </div>
+        </div>
+      </li> -->
+      <!-- <li>
+        <div class="transacoes_item ">
+          <div class="entrada_icon">
+            <i class="ri-arrow-down-line"></i>
+            <div class="entrada_info">
+              <h4>Café do João</h4>
+              <span>08:30</span>
+            </div>
+          </div>
+          <div class="valor">
+            <h3>R$ 7.90</h3>
+            <div>
+              <i class="ri-delete-bin-line"></i>
+            </div>
+          </div>
+        </div>
+      </li> -->
+    </ul>
+
+
+  </section>
+
+  <div id="modal" class="modal_container">
+    <div class="modal_content">
+      <button class="fechar" id="fecharModal">X</button>
+      <h3>Registrar entrada</h3>
+      <form class="form">
+        <label for="desc">Descrição</label>
+        <input type="text" class="input inputsModal" id="desc" placeholder="Ex: Salário, comissão, venda..." required>
+        <label for="valor"> Valor</label>
+        <input type="text" class="input inputsModal" id="valor" placeholder="Ex: 1.500" required>
+        <label for="select">Tipo</label>
+        <select name="select" id="select" class="inputsModal">
+          <option value="entrada">
+            Entrada
+          </option>
+          <option value="saida">
+            Saida
+          </option>
+        </select>
+        <button class="form_btn entrada" id="registrarEntrada">Registrar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="./script.js"></script>
+</body>
+
+</html>
