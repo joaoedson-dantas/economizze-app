@@ -5,11 +5,6 @@ function setLocalStorage(db_transaction) {
   localStorage.setItem("dbTransaction", JSON.stringify(db_transaction));
 }
 
-/* Crud */
-
-const readTransaction = () => getLocalStorage();
-
-/* Criar */
 const creatTransaction = (transaction) => {
   const db_transaction = getLocalStorage();
   db_transaction.push(transaction);
@@ -30,7 +25,7 @@ function creatLi(transaction) {
       </div>
       <div class="valor">
         <h3>${transaction.valor}</h3>
-        <div>
+        <div id="icon-excluir">
           <i class="ri-delete-bin-line"></i>
         </div>
       </div>
@@ -50,7 +45,7 @@ function creatLi(transaction) {
           </div>
           <div class="valor">
             <h3>${transaction.valor}</h3>
-            <div>
+            <div id="icon-excluir">
               <i class="ri-delete-bin-line"></i>
             </div>
           </div>
@@ -58,7 +53,21 @@ function creatLi(transaction) {
       </li> `;
     const transacoes_ul = document.querySelector("#transacoes_ul");
     transacoes_ul.appendChild(newLi);
+    modalExcluir();
   }
+}
+function clearUl() {
+  const lis = document.querySelectorAll("#transacoes_ul>li");
+  lis.forEach((li) => li.parentNode.removeChild(li));
+}
+function updateList() {
+  const db_transaction = getLocalStorage();
+  clearUl();
+  const db_transactionOrderad = db_transaction.sort(
+    (a, b) => b.dateNow - a.dateNow
+  );
+  db_transactionOrderad.forEach(creatLi);
+  /* db_transaction.forEach(creatLi); */
 }
 
 function clearUl() {
@@ -66,18 +75,7 @@ function clearUl() {
   lis.forEach((li) => li.parentNode.removeChild(li));
 }
 
-function updateList() {
-  const db_transaction = getLocalStorage();
-  clearUl();
-  db_transaction.forEach(creatLi);
-}
-
 /* Modificar */
-const updateTransaction = (index, transaction) => {
-  const db_transaction = getLocalStorage();
-  db_transaction[index] = transaction;
-  setLocalStorage(db_transaction);
-};
 
 const deleteTransaction = (index) => {
   const db_transaction = getLocalStorage();
@@ -106,6 +104,7 @@ function saveTransaction() {
       desc,
       valor,
       tipo,
+      dateNow: Date.now(),
     };
     creatTransaction(transaction);
     atualizarValores();
@@ -180,16 +179,6 @@ function iniciaModal(modalId) {
   }
 }
 
-const btnEntradaModal = document.querySelector("#entrada-btn");
-btnEntradaModal.addEventListener("click", () => iniciaModal("modal"));
-
-updateList();
-atualizarValores();
-
-const today = new Date();
-const day = today.getDate();
-const month = today.getMonth() + 1;
-
 function dataTransaction() {
   const today = new Date();
   const day = today.getDate();
@@ -211,4 +200,29 @@ function dataTransaction() {
   const monthAtual = monthNames[month];
 
   return `${day} ${monthAtual}`;
+}
+
+/* const btnModalExcluir = document.querySelector("#icon-excluir i");
+btnModalExcluir.addEventListener("click", () => iniciaModal2("modal_excluir")); */
+
+const btnEntradaModal = document.querySelector("#entrada-btn");
+btnEntradaModal.addEventListener("click", () => iniciaModal("modal"));
+
+updateList();
+atualizarValores();
+
+function modalExcluir() {
+  console.log();
+  const btnModalExcluir = document.querySelector("#icon-excluir i");
+  btnModalExcluir.addEventListener("click", (item) =>
+    iniciaModal("modal_excluir")
+  );
+}
+
+function excluirBtn() {
+  console.log(item);
+  const btnSim = document.querySelector("#excluir");
+  btnSim.addEventListener("click", (item) => {
+    console.log(item);
+  });
 }

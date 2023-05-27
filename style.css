@@ -272,3 +272,54 @@ body {
 .form_btn.saida:hover {
   background-color: #b11b07;
 }
+
+/* modal excluir */
+
+.modal_excluir.mostrar {
+  display: flex;
+}
+
+.modal_excluir {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_excluir_content {
+  background-color: #fff;
+  max-width: 60%;
+  min-width: 250px;
+  padding: 30px;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btns_excluir {
+  display: flex;
+  gap: 20px;
+}
+
+.btns_excluir button {
+  border: none;
+  padding: 12px 18px;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#excluir {
+  background-color: #d4210a;
+  color: #fff;
+}
