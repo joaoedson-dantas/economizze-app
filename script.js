@@ -9,12 +9,6 @@ function setLocalStorage(db_transaction) {
 
 const readTransaction = () => getLocalStorage();
 
-/* function creatTransaction(transaction) {
-  const db_transaction = getLocalStorage();
-  db_transaction.push(transaction);
-  setLocalStorage(db_transaction);
-} */
-
 /* Criar */
 const creatTransaction = (transaction) => {
   const db_transaction = getLocalStorage();
@@ -29,9 +23,9 @@ function creatLi(transaction) {
     <div class="transacoes_item transacao-entrada">
       <div class="entrada_icon">
         <i class="ri-arrow-up-line"></i>
-        <div class="entrada_info">
+        <div class="desc_info">
           <h4>${transaction.desc}</h4>
-          <span>07:00</span>
+          <span id="date">${dataTransaction()}</span>
         </div>
       </div>
       <div class="valor">
@@ -49,9 +43,9 @@ function creatLi(transaction) {
         <div class="transacoes_item ">
           <div class="entrada_icon">
             <i class="ri-arrow-down-line"></i>
-            <div class="entrada_info">
+            <div class="desc_info">
               <h4>${transaction.desc}</h4>
-              <span>08:30</span>
+              <span id="date">${dataTransaction()}</span>
             </div>
           </div>
           <div class="valor">
@@ -114,6 +108,7 @@ function saveTransaction() {
       tipo,
     };
     creatTransaction(transaction);
+    atualizarValores();
     updateList();
     fecharModal();
   }
@@ -121,6 +116,48 @@ function saveTransaction() {
 
 const btnEntrada = document.getElementById("registrarEntrada");
 btnEntrada.addEventListener("click", saveTransaction);
+
+const inputValor = document.querySelector("#valor");
+inputValor.addEventListener("input", () => {
+  const valor = inputValor.value.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
+  const formatarValor = formatarMoeda(valor);
+  inputValor.value = formatarValor;
+});
+
+function formatarMoeda(valor) {
+  const formatar = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+  return formatar.format(valor / 100); // Divide por 100 para tratar o valor como centavos
+}
+
+/* ------------- */
+
+function atualizarValores() {
+  const valorEntrada = document.querySelector("#valorEntrada");
+  const valorSaida = document.querySelector("#valorSaida");
+  const valorTotal = document.querySelector("#valorTotal");
+
+  const db_transaction = getLocalStorage();
+  let valorTotalEntrada = 0;
+  let valorTotalSaida = 0;
+  db_transaction.forEach((item) => {
+    if (item.tipo === "entrada") {
+      const valorEntrada = +item.valor.replace(/[.,R$]/g, "");
+      valorTotalEntrada = valorTotalEntrada + valorEntrada;
+    } else {
+      const valorSaida = +item.valor.replace(/[.,R$]/g, "");
+      valorTotalSaida = valorTotalSaida + valorSaida;
+    }
+  });
+  const somaValorTotal = valorTotalEntrada - valorTotalSaida;
+  valorTotal.innerHTML = formatarMoeda(somaValorTotal);
+  const formatarMoedaEntrada = formatarMoeda(valorTotalEntrada);
+  const formatarMoedaSaida = formatarMoeda(valorTotalSaida);
+  valorEntrada.innerHTML = formatarMoedaEntrada;
+  valorSaida.innerHTML = formatarMoedaSaida;
+}
 
 /* MODAL  */
 
@@ -147,3 +184,31 @@ const btnEntradaModal = document.querySelector("#entrada-btn");
 btnEntradaModal.addEventListener("click", () => iniciaModal("modal"));
 
 updateList();
+atualizarValores();
+
+const today = new Date();
+const day = today.getDate();
+const month = today.getMonth() + 1;
+
+function dataTransaction() {
+  const today = new Date();
+  const day = today.getDate();
+  const month = today.getMonth();
+  const monthNames = [
+    "JAN",
+    "FEV",
+    "MAR",
+    "ABR",
+    "MAI",
+    "JUN",
+    "JUL",
+    "AGO",
+    "SET",
+    "OUT",
+    "NOV",
+    "DEZ",
+  ];
+  const monthAtual = monthNames[month];
+
+  return `${day} ${monthAtual}`;
+}

@@ -114,6 +114,7 @@ body {
   border-bottom: 1px solid #e2e2e2;
   padding-bottom: 32px;
   margin-top: 32px;
+  gap: 20px;
 }
 .valor {
   display: flex;
@@ -135,10 +136,10 @@ body {
 }
 
 .entrada_icon i {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   background-color: #e2e2e2;
   color: #000;
-  padding: 16px;
+  padding: 12px;
   border-radius: 50%;
 }
 
@@ -157,6 +158,17 @@ body {
   .main {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+  .desc_info h4 {
+    font-size: 0.825rem;
+  }
+
+  .desc_info span {
+    font-size: 0.725rem;
+  }
+
+  .valor h3 {
+    font-size: 0.825rem;
   }
 }
 

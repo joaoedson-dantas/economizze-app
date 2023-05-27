@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
@@ -26,15 +26,15 @@
   <main class="main">
     <div class="main_item-container">
       <h3 class="h3-icon entrada">Entradas R$ <i class="ri-arrow-up-line"></i></h3>
-      <p> 0.00</p>
+      <p id="valorEntrada"> 0.00</p>
     </div>
     <div class=" main_item-container">
       <h3 class="h3-icon saida">Saidas R$ <i class="ri-arrow-down-line"></i></h3>
-      <p> 0.00</p>
+      <p id="valorSaida"> 0.00</p>
     </div>
     <div class=" main_item-container">
       <h3>Total R$ </h3>
-      <p> 0.00</p>
+      <p id="valorTotal"> 0.00</p>
     </div>
   </main>
   <section class="inputs_container">
@@ -100,7 +100,7 @@
             Saida
           </option>
         </select>
-        <button class="form_btn entrada" id="registrarEntrada">Registrar</button>
+        <button type="button" class="form_btn entrada" id="registrarEntrada">Registrar</button>
       </form>
     </div>
   </div>
