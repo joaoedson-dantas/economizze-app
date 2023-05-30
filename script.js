@@ -25,7 +25,7 @@ function creatLi(transaction) {
       </div>
       <div class="valor">
         <h3>${transaction.valor}</h3>
-        <div id="icon-excluir">
+        <div class="icon-excluir">
           <i class="ri-delete-bin-line"></i>
         </div>
       </div>
@@ -34,7 +34,7 @@ function creatLi(transaction) {
     transacoes_ul.appendChild(newLi);
   } else {
     newLi.innerHTML = ` 
-    <li>
+
         <div class="transacoes_item ">
           <div class="entrada_icon">
             <i class="ri-arrow-down-line"></i>
@@ -45,15 +45,14 @@ function creatLi(transaction) {
           </div>
           <div class="valor">
             <h3>${transaction.valor}</h3>
-            <div id="icon-excluir">
+            <div class="icon-excluir">
               <i class="ri-delete-bin-line"></i>
             </div>
           </div>
         </div>
-      </li> `;
+    `;
     const transacoes_ul = document.querySelector("#transacoes_ul");
     transacoes_ul.appendChild(newLi);
-    modalExcluir();
   }
 }
 function clearUl() {
@@ -67,7 +66,7 @@ function updateList() {
     (a, b) => b.dateNow - a.dateNow
   );
   db_transactionOrderad.forEach(creatLi);
-  /* db_transaction.forEach(creatLi); */
+  btnsExcluir();
 }
 
 function clearUl() {
@@ -81,6 +80,7 @@ const deleteTransaction = (index) => {
   const db_transaction = getLocalStorage();
   db_transaction.splice(index, 1); // Pegar o index e excluir somente um que é ele mesmo.
   setLocalStorage(db_transaction);
+  updateList();
 };
 
 /* Interação */
@@ -156,14 +156,17 @@ function atualizarValores() {
   const formatarMoedaSaida = formatarMoeda(valorTotalSaida);
   valorEntrada.innerHTML = formatarMoedaEntrada;
   valorSaida.innerHTML = formatarMoedaSaida;
+  updateList();
 }
 
 /* MODAL  */
 
 function fecharModal() {
   const modal = document.querySelector("#modal");
+  const modalExcluir = document.querySelector("#modal_excluir");
   clearFields();
   modal.classList.remove("mostrar");
+  modalExcluir.classList.remove("mostrar");
 }
 
 function iniciaModal(modalId) {
@@ -171,7 +174,11 @@ function iniciaModal(modalId) {
   if (modal) {
     modal.classList.add("mostrar");
     modal.addEventListener("click", (event) => {
-      if (event.target.id == modalId || event.target.className == "fechar") {
+      if (
+        event.target.id == modalId ||
+        event.target.className == "fechar" ||
+        event.target.className == "fecharModal"
+      ) {
         clearFields();
         modal.classList.remove("mostrar");
       }
@@ -208,21 +215,22 @@ btnModalExcluir.addEventListener("click", () => iniciaModal2("modal_excluir")); 
 const btnEntradaModal = document.querySelector("#entrada-btn");
 btnEntradaModal.addEventListener("click", () => iniciaModal("modal"));
 
-updateList();
-atualizarValores();
-
-function modalExcluir() {
-  console.log();
-  const btnModalExcluir = document.querySelector("#icon-excluir i");
-  btnModalExcluir.addEventListener("click", (item) =>
-    iniciaModal("modal_excluir")
-  );
-}
-
-function excluirBtn() {
-  console.log(item);
-  const btnSim = document.querySelector("#excluir");
-  btnSim.addEventListener("click", (item) => {
-    console.log(item);
+function btnsExcluir() {
+  const btns = document.querySelectorAll(".icon-excluir i");
+  const btnsOrder = Array.from(btns).reverse();
+  btnsOrder.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      const transaction = getLocalStorage()[index];
+      const reponse = confirm(
+        `Deseja realmente apagar a trasação ${transaction.desc}?`
+      );
+      if (reponse) {
+        deleteTransaction(index);
+        updateList();
+      }
+    });
   });
 }
+
+updateList();
+atualizarValores();
