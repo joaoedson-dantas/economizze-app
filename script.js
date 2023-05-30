@@ -81,6 +81,7 @@ const deleteTransaction = (index) => {
   db_transaction.splice(index, 1); // Pegar o index e excluir somente um que é ele mesmo.
   setLocalStorage(db_transaction);
   updateList();
+  atualizarValores();
 };
 
 /* Interação */
